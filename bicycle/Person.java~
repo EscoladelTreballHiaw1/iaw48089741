@@ -187,27 +187,8 @@ public class Person {
      * 
      * @return a string that represents the person
      */
-     public String toString() {
-        String sexe, text, casat;
-        if ( sex == 'W') {
-            sexe = " una noia";
-            if ( married ) {
-                casat = " està casada";
-            } else {
-                casat = " no està casada";
-            }
-        } else {
-            sexe = " un noi";
-            if ( married ) {
-                casat = " està casat";
-            } else {
-                casat = " no està casat";
-            }
-        }
-        
-        text = "És diu " + this.name + " té " + age + " anys, fa " + height + "cm d'altura" 
-            + " és" + sexe + " y" + casat + ".";
-        return text;
-        
+    public String toString() {
+        String s = "El meu nom és " + this.name + " i  sóc " + this.sex;
+        return s;
     }
 }
