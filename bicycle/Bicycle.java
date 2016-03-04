@@ -1,12 +1,11 @@
 /*
- * Bicycle.java
- * 
- * Copyright 2010-2012 Mònica Ramírez Arceda <mramirez@escoladeltreball.org>
+ * ArraysUtils.java        1.0 26/02/2016
+ *
+ * Copyright 2016 Mey-ling Garcia <meygpons@gmail.com>
  * 
  * This is free software, licensed under the GNU General Public License v3.
  * See http://www.gnu.org/licenses/gpl.html for more information.
  */
-
 package bicycle;
 
 /**
@@ -57,13 +56,23 @@ public class Bicycle {
      */
     public Bicycle(int nFrontSprockets, int nRearSprockets, double v) {
         this.model = "Mountain bike";
-        this.nFrontSprockets = nFrontSprockets;
-        this.nRearSprockets = nRearSprockets;
+        // si el nFrontSprockets es inferior a 1 automaticament posarem 1
+        if (nFrontSprockets < 1) {
+            this.nFrontSprockets = 1;  
+        } else {  // Altrament posarem el numero introduit per parametre
+            this.nFrontSprockets = nFrontSprockets;
+        }
+        // si el nRearSprockets  es inferior a 3 automaticament possarem 3
+        if (nRearSprockets < 3 ) {
+            this.nRearSprockets = 3;
+        } else { // altrament posarem el numero introduit per parametre
+            this.nRearSprockets = nRearSprockets; 
+        } 
         this.frontSprocket = nFrontSprockets;
-        this.rearSprocket = 1;
+        this.rearSprocket = 3;
         this.v = v;
     }
-
+    
     /**
      * Constructor.
      * 
@@ -74,12 +83,95 @@ public class Bicycle {
      * @param nRearSprockets The number of rear sprockets the bicyle has.
      * @param v The bicycle's speed in km/h.
      */
-    public Bicycle(String model, int frontSprocket, int rearSprocket, int nFrontSprockets, int nRearSprockets, double v) {
+ public Bicycle(String model, int frontSprocket, int rearSprocket, int nFrontSprockets, 
+                   int nRearSprockets, double v) {
         this.model = model;
-        this.frontSprocket = frontSprocket;
-        this.rearSprocket = rearSprocket;
-        this.nFrontSprockets = nFrontSprockets;
-        this.nRearSprockets = nRearSprockets;
+        // si el nFrontSprockets es inferior a 1 automaticament posarem 1
+        if (nFrontSprockets < 1) {
+            this.nFrontSprockets = 1;
+        } else { // Altrament posarem el numero introduit per parametre
+            this.nFrontSprockets = nFrontSprockets;
+        }
+        // si el nRearSprockets  es inferior a 3 automaticament possarem 3
+        if (nRearSprockets < 3) {
+            this.nRearSprockets = 3;
+        } else { // altrament posarem el numero introduit per parametre
+            this.nRearSprockets = nRearSprockets; 
+        }
+        // frontSprocket es el plat en el qual es troba, per tant si es menor de 0 automaticament possarem 1
+        if (frontSprocket <= 0 ) {
+            this.frontSprocket = 1;
+        } else if (frontSprocket > nFrontSprockets) { // si és major al numero de plats totals possarem el numero maxim
+            this.frontSprocket = this.nFrontSprockets;
+        } else { // altrament possarem el numero introduit per parametre
+            this.frontSprocket = frontSprocket;
+        }
+        // rearSprocket es el pinyol en el qual es troba, per tant si es menor de 0 automaticament possarem 1
+        if (rearSprocket <= 0 ) {
+            this.rearSprocket = 1;
+        } else if (rearSprocket > nRearSprockets) { // si és major al numero de pinyons totals possarem el numero maxi
+            this.rearSprocket = this.nRearSprockets;
+        } else { // altrament possarem el numero introduit per parametre
+            this.rearSprocket = rearSprocket; 
+        }
+        this.v = v;
+        
+    }
+
+	    // Metode per poder veure els atributs de la bike, així poder controlar que va bé tot
+    public void tot() {   
+        System.out.println("Model  " + model);
+        System.out.println("frontSprockets  " + frontSprocket);
+        System.out.println("rearSprockets  " + rearSprocket);
+        System.out.println("nFrontSprockets  " + nFrontSprockets);
+        System.out.println("nRearSprockets  " + nRearSprockets);
+        System.out.println("velocitat  " + v);
+    }
+	
+	//SETTER ANG GETTERS
+    // Set sirve para cambiar el atributos deseado del objeto
+    // Get sirve para mostrar el atributo deseado del objeto
+	public String getModel() {
+        return model;
+    }
+    
+    public void setModel(String model) {
+        this.model = model.trim();
+    }
+    
+    public int getRearSprocket() {
+        return rearSprocket;
+    }
+    
+    public void setRearSprocket(int rearSprocket) {
+        // si el numero de pinyol es troba entre 0 i el numero maxim de pinyols
+        // podrà cambiar de pinyol
+        if (rearSprocket <= nRearSprockets && rearSprocket > 0) {
+            this.rearSprocket = rearSprocket;
+        } else { // altrament no podrà fer aquest cambi
+            System.out.println("no pots cambiar");
+        }
+    }
+    
+    public int getFrontSprocket() {
+        return frontSprocket;
+    }
+    
+    public void setFrontSprocket(int frontSprocket) {
+        // si el número de plats es troba entre 0 i el número máxim de plats 
+        // podrà cambiar de plat
+        if (frontSprocket > 0 && frontSprocket <= nFrontSprockets) {
+            this.frontSprocket = frontSprocket;
+        } else { // altrament no podrà fer aquest cambi.
+            System.out.println("no pots cambiar");
+        }
+    }
+    
+    public double getV() {
+        return v;
+    }
+    
+    public void setV(double v) {
         this.v = v;
     }
 
@@ -142,37 +234,15 @@ public class Bicycle {
             newV = 0;
         this.v = newV;
     }
-
-    // Setter and getters
-    public String getModel() {
-        return model;
+	
+	/**
+     * Para la bicicleta de cop
+     * la velocitat baixa a 0
+     * 
+     */
+    public void stop() {
+        this.v = 0;
     }
-
-    public void setModel(String model) {
-        this.model = model.trim();
-    }
-
-    public int getRearSprocket() {
-        return rearSprocket;
-    }
-
-    public void setRearSprocket(int rearSprocket) {
-        this.rearSprocket = rearSprocket;
-    }
-
-    public int getFrontSprocket() {
-        return frontSprocket;
-    }
-
-    public void setFrontSprocket(int frontSprocket) {
-        this.frontSprocket = frontSprocket;
-    }
-
-    public double getV() {
-        return v;
-    }
-
-    public void setV(double v) {
-        this.v = v;
-    }
+    
+    
 }
