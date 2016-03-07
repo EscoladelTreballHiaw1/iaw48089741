@@ -16,7 +16,7 @@ package bicycle;
  * so on.
  */
 public class Bicycle {
-    
+
     /** The bicycle's model. */
     private String model;
     /** The engaged front sprocket. */
@@ -33,7 +33,7 @@ public class Bicycle {
     private final static int VMAX = 100;
     /** Increment of the bicycle speed */
     private final static int DV = 5;
-    
+
     /**
      * Constructor by default. Creates a stopped mountain bike with 3 front sprockets, 7 rear sprockets and with the
      * first front and rear sprockets engaged.
@@ -46,7 +46,7 @@ public class Bicycle {
         this.nRearSprockets = 7;
         this.v = 0;
     }
-    
+
     /**
      * Constructor. Creates a mountain bike with the first rear sprocket engaged and the last front sprocket engaged
      * 
@@ -83,7 +83,7 @@ public class Bicycle {
      * @param nRearSprockets The number of rear sprockets the bicyle has.
      * @param v The bicycle's speed in km/h.
      */
-    public Bicycle(String model, int frontSprocket, int rearSprocket, int nFrontSprockets, 
+ public Bicycle(String model, int frontSprocket, int rearSprocket, int nFrontSprockets, 
                    int nRearSprockets, double v) {
         this.model = model;
         // si el nFrontSprockets es inferior a 1 automaticament posarem 1
@@ -117,8 +117,8 @@ public class Bicycle {
         this.v = v;
         
     }
-    
-    // Metode per poder veure els atributs de la bike, així poder controlar que va bé tot
+
+	    // Metode per poder veure els atributs de la bike, així poder controlar que va bé tot
     public void tot() {   
         System.out.println("Model  " + model);
         System.out.println("frontSprockets  " + frontSprocket);
@@ -127,11 +127,11 @@ public class Bicycle {
         System.out.println("nRearSprockets  " + nRearSprockets);
         System.out.println("velocitat  " + v);
     }
-    
-    //SETTER ANG GETTERS
+	
+	//SETTER ANG GETTERS
     // Set sirve para cambiar el atributos deseado del objeto
     // Get sirve para mostrar el atributo deseado del objeto
-    public String getModel() {
+	public String getModel() {
         return model;
     }
     
@@ -174,7 +174,7 @@ public class Bicycle {
     public void setV(double v) {
         this.v = v;
     }
-    
+
     /**
      * Changes the engaged front sprocket. Increases or decreases the front sprocket by 1. The bicycle can't be stopped.
      * 
@@ -194,7 +194,7 @@ public class Bicycle {
         }
         return isChanged;
     }
-    
+
     /**
      * Changes the engaged rear sprocket. Increases or decreases the rear sprocket by 1. The bicycle can't be stopped.
      * 
@@ -214,7 +214,7 @@ public class Bicycle {
         }
         return isChanged;
     }
-    
+
     /**
      * Accelerates the bicycle.
      */
@@ -224,7 +224,7 @@ public class Bicycle {
             newV = Bicycle.VMAX;
         this.v = newV;
     }
-    
+
     /**
      * Decreases the velocity of the bicycle.
      */
@@ -234,8 +234,8 @@ public class Bicycle {
             newV = 0;
         this.v = newV;
     }
-    
-    /**
+	
+	/**
      * Para la bicicleta de cop
      * la velocitat baixa a 0
      * 
@@ -244,78 +244,5 @@ public class Bicycle {
         this.v = 0;
     }
     
-    /**
-     * pinyo com més petit més ràpid
-     * plat com més gran més ràpid
-     * Permet reduir la marxa.
-     * proces:
-     * frontSprocket = plat
-     * rearSProcket = pinyó
-     * disminuim un plat, augmentem un pinyó
-     * disminuim un pinyó, augmentem un plat
-     * 
-     * @return boolean true si s'ha pogut fer el canvi de marxa.
-     *                 false si no s'ha pogut fer.
-     */
-    public boolean slowDown() {
-        boolean found = true;
-        // primer hem de mirar a quin plat estem
-        // si estem en el plat més petit, no toquem el plat i passem al pinyó.
-        if ( frontSprocket == 1 ) {
-            // mirem el pinyó si està en el més gran 
-            if (rearSprocket == nRearSprockets ) {
-                found = false;
-            } else {
-                rearSprocket++;
-            }
-            // altrament, restarem 1 al plat (disminuirem un plat)
-        } else {
-             if (rearSprocket == nRearSprockets ) {
-                frontSprocket--;
-            } else {
-                rearSprocket++;
-                frontSprocket--;
-            }
-        }
-        return found;
-    }
-    
-    /**
-     * pinyo com més petit més ràpid
-     * plat com més gran més ràpid
-     * Permet augmentar la marxa. 
-     * proces:
-     * frontSprocket = plat
-     * rearSProcket = pinyó
-     * augmentem un plat, disminuim un pinyó
-     * augmentem un pinyó, disminuim un plat
-     * 
-     * @return boolean true si s'ha pogut fer el canvi de marxa
-     *                 false si no s'ha pogut fer.
-     */
-    
-    public boolean speedUp() {
-        boolean found = true;
-        // primer hem de mirar a quin plat estem 
-        // si estem en el plat més gran, no toquem el plat i passem a mirar el pinyó
-        if ( frontSprocket == nFrontSprockets) {
-            // mirem el pinyó si està en el més petit
-            if ( rearSprocket == 1 ) {
-                found = false;
-            } else {
-                rearSprocket--;
-            }
-            // altrament, sumarem 1 al plat ( augmentarem un plat)
-        } else {
-            if (rearSprocket == 1 ) {
-                frontSprocket++;
-            } else {
-                rearSprocket--;
-                frontSprocket++;
-            }
-        }
-        return found;
-    }
-        
     
 }
